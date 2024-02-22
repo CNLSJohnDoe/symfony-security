@@ -66,7 +66,7 @@ class AnonymousToken extends AbstractToken
 
     public function __serialize()
     {
-        return array($this->key, parent::serialize());
+        return array($this->key, serialize(parent::__serialize()));
     }
 
     /**
@@ -80,6 +80,6 @@ class AnonymousToken extends AbstractToken
     public function __unserialize($data)
     {
         list($this->key, $parentStr) = $data;
-        parent::unserialize($parentStr);
+        parent::__unserialize(unserialize($parentStr));
     }
 }

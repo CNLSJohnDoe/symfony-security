@@ -64,7 +64,7 @@ class FieldEntry extends Entry implements FieldEntryInterface
     {
         return array(
             $this->field,
-            parent::serialize(),
+            serialize(parent::__serialize()),
         );
     }
 
@@ -79,6 +79,6 @@ class FieldEntry extends Entry implements FieldEntryInterface
     public function __unserialize($data)
     {
         list($this->field, $parentStr) = $data;
-        parent::unserialize($parentStr);
+        parent::__unserialize(unserialize($parentStr));
     }
 }

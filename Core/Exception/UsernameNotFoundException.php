@@ -61,7 +61,7 @@ class UsernameNotFoundException extends AuthenticationException
     {
         return array(
             $this->username,
-            parent::serialize(),
+            serialize(parent::__serialize()),
         );
     }
 
@@ -77,6 +77,6 @@ class UsernameNotFoundException extends AuthenticationException
     {
         list($this->username, $parentData) = $data;
 
-        parent::unserialize($parentData);
+        parent::__unserialize(unserialize($parentData));
     }
 }

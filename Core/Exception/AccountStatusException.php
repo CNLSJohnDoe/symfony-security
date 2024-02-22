@@ -56,7 +56,7 @@ abstract class AccountStatusException extends AuthenticationException
     {
         return array(
             $this->user,
-            parent::serialize(),
+            serialize(parent::__serialize()),
         );
     }
 
@@ -72,6 +72,6 @@ abstract class AccountStatusException extends AuthenticationException
     {
         list($this->user, $parentData) = $data;
 
-        parent::unserialize($parentData);
+        parent::__unserialize(unserialize($parentData));
     }
 }

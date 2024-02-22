@@ -104,7 +104,7 @@ class RememberMeToken extends AbstractToken
         return array(
             $this->key,
             $this->providerKey,
-            parent::serialize(),
+            serialize(parent::__serialize()),
         );
     }
 
@@ -119,6 +119,6 @@ class RememberMeToken extends AbstractToken
     public function __unserialize($data)
     {
         list($this->key, $this->providerKey, $parentStr) = $data;
-        parent::unserialize($parentStr);
+        parent::__unserialize(unserialize($parentStr));
     }
 }

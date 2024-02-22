@@ -79,7 +79,7 @@ class PreAuthenticatedToken extends AbstractToken
 
     public function __serialize()
     {
-        return array($this->credentials, $this->providerKey, parent::serialize());
+        return array($this->credentials, $this->providerKey, serialize(parent::__serialize()));
     }
 
     /**
@@ -93,6 +93,6 @@ class PreAuthenticatedToken extends AbstractToken
     public function __unserialize($data)
     {
         list($this->credentials, $this->providerKey, $parentStr) = $data;
-        parent::unserialize($parentStr);
+        parent::__unserialize(unserialize($parentStr));
     }
 }
