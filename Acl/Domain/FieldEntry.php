@@ -57,10 +57,15 @@ class FieldEntry extends Entry implements FieldEntryInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize($this->__serialize());
+    }
+
+    public function __serialize()
+    {
+        return array(
             $this->field,
             parent::serialize(),
-        ));
+        );
     }
 
     /**
@@ -68,7 +73,12 @@ class FieldEntry extends Entry implements FieldEntryInterface
      */
     public function unserialize($serialized)
     {
-        list($this->field, $parentStr) = unserialize($serialized);
+        $this->__unserialize(unserialize($serialized));
+    }
+
+    public function __unserialize($data)
+    {
+        list($this->field, $parentStr) = $data;
         parent::unserialize($parentStr);
     }
 }

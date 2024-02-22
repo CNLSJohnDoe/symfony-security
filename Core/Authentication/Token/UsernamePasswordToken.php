@@ -93,7 +93,12 @@ class UsernamePasswordToken extends AbstractToken
      */
     public function serialize()
     {
-        return serialize(array($this->credentials, $this->providerKey, parent::serialize()));
+        return serialize($this->__serialize());
+    }
+
+    public function __serialize()
+    {
+        return array($this->credentials, $this->providerKey, parent::serialize());
     }
 
     /**
@@ -101,7 +106,12 @@ class UsernamePasswordToken extends AbstractToken
      */
     public function unserialize($serialized)
     {
-        list($this->credentials, $this->providerKey, $parentStr) = unserialize($serialized);
+        $this->__unserialize(unserialize($serialized));
+    }
+
+    public function __unserialize($data)
+    {
+        list($this->credentials, $this->providerKey, $parentStr) = $data;
         parent::unserialize($parentStr);
     }
 }

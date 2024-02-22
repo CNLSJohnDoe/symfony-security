@@ -178,7 +178,12 @@ class Entry implements AuditableEntryInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize($this->__serialize());
+    }
+
+    public function __serialize()
+    {
+        return array(
             $this->mask,
             $this->id,
             $this->securityIdentity,
@@ -186,7 +191,7 @@ class Entry implements AuditableEntryInterface
             $this->auditFailure,
             $this->auditSuccess,
             $this->granting,
-        ));
+        );
     }
 
     /**
@@ -196,6 +201,11 @@ class Entry implements AuditableEntryInterface
      */
     public function unserialize($serialized)
     {
+        $this->__unserialize(unserialize($serialized));
+    }
+
+    public function __unserialize($data)
+    {
         list($this->mask,
              $this->id,
              $this->securityIdentity,
@@ -203,6 +213,6 @@ class Entry implements AuditableEntryInterface
              $this->auditFailure,
              $this->auditSuccess,
              $this->granting
-        ) = unserialize($serialized);
+        ) = $data;
     }
 }
