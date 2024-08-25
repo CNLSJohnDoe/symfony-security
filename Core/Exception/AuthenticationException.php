@@ -66,13 +66,13 @@ class AuthenticationException extends \RuntimeException implements \Serializable
 
     public function __unserialize($data)
     {
-        [
+        list( 
             $this->token,
             $this->code,
             $this->message,
             $this->file,
             $this->line
-        ] = $data;
+        ) = $data;
     }
 
     /**
