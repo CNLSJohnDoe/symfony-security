@@ -79,7 +79,12 @@ class ContextListener implements ListenerInterface
             return;
         }
 
+        $originalToken = $token;
         $token = unserialize($token);
+
+        if ($token === false) {
+            $session->set('_not_unserializable_'.$this->contextKey, $originalToken);
+        }
 
         if (null !== $this->logger) {
             $this->logger->debug('Read SecurityContext from the session');
