@@ -146,10 +146,10 @@ abstract class AbstractToken implements TokenInterface
      */
     public function serialize()
     {
-        return serialize($this->__serialize());
+        return serialize($this->serializableContent());
     }
 
-    public function __serialize()
+    public function serializableContent()
     {
         return array(
             is_object($this->user) ? clone $this->user : $this->user,
@@ -164,10 +164,10 @@ abstract class AbstractToken implements TokenInterface
      */
     public function unserialize($serialized)
     {
-        $this->__unserialize(unserialize($serialized));
+        $this->unserializeContent(unserialize($serialized));
     }
 
-    public function __unserialize($data)
+    public function unserializeContent($data)
     {
         list($this->user, $this->authenticated, $this->roles, $this->attributes) = $data;
     }
